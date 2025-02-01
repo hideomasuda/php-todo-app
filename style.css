@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ul {
+  max-width: 500px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+li {
+  margin: 5px 0;
+  position: relative;
+}
+
+a {
+  margin-left: 10px;
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.status {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  padding: 10px;
+  background: #fff;
+  border: 2px solid #333;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+li:hover .status {
+  display: block;
+}
