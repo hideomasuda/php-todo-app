@@ -1,8 +1,5 @@
 <?php
-//ini_set('display_errors', "On"); //エラー表示オン
-require 'db.php'; //データベース接続
-
-// タスク一覧を取得
+require 'db.php';
 $sql = "SELECT * FROM tasks ORDER BY created_at DESC";
 $stmt = $pdo->query($sql);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,29 +14,34 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>ToDoリスト</h1>
+  <div class="container">
+    <h1>ToDoリスト</h1>
 
-  <!-- タスク追加フォーム -->
-  <form action="add.php" method="POST">
-    <input type="text" name="task" placeholder="新しいタスクを追加" required>
-    <button type="submit">追加</button>
-  </form>
+    <!-- タスク追加フォーム -->
+    <form action="add.php" method="POST" class="task-form">
+      <input type="text" name="task" placeholder="新しいタスクを追加" required>
+      <input type="date" name="deadline" placeholder="期限日を設定">
+      <button type="submit">＋ 追加</button>
+    </form>
 
-  <!-- タスク一覧表示 -->
-  <ul>
-    <?php foreach ($tasks as $task): ?>
-      <li>
-        <span style="text-decoration: <?= $task['status'] ? 'line-through' : 'none'; ?>">
-          <?=  htmlspecialchars($task['task'], ENT_QUOTES, 'UTF-8') ?>
-        </span>
-        <a href="complete.php?id=<?=  $task['id'] ?>"><?= $task['status'] ? '[未完了に戻す]' : '[完了]'; ?></a>
-        <a href="delete.php?id=<?=  $task['id'] ?>">[削除]</a>
-        <span class="status">
-          作成日時：<?= $task['created_at']; ?><br>
-          完了日時：<?= $task['status'] ?  $task['completed_at'] : ''; ?>
-        </span>
-      </li>
-    <?php endforeach; ?>
-  </ul>
+    <!-- タスク一覧 -->
+    <ul class="task-list">
+      <?php foreach ($tasks as $task): ?>
+        <li class="task-item <?= $task['status'] ? 'completed' : ''; ?>">
+          <span class="task-text"><?= htmlspecialchars($task['task'], ENT_QUOTES, 'UTF-8') ?></span>
+          <div class="task-actions">
+            <a href="complete.php?id=<?= $task['id'] ?>" class="btn-complete">
+              <?= $task['status'] ? '⏪ 未完了' : '✅ 完了'; ?>
+            </a>
+            <a href="delete.php?id=<?= $task['id'] ?>" class="btn-delete">🗑 削除</a>
+          </div>
+          <div class="task-status">
+            締切: <?= $task['deadline'] ? $task['deadline'] : 'なし'; ?> 
+            <?= $task['status'] ? ' | 完了: ' . $task['completed_at'] : ''; ?>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
 </body>
 </html>

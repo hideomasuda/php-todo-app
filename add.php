@@ -1,16 +1,24 @@
 <?php
-//ini_set('display_errors', "On"); //エラー表示オン
-
+ini_set('display_errors', TRUE);
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $task = $_POST['task'];
+  $deadline = $_POST['deadline'];
 
   if (!empty($task)) {
-    $sql = "INSERT INTO tasks (task) VALUES (:task)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':task', $task, PDO::PARAM_STR);
-    $stmt->execute();
+    if (!empty($deadline)) {
+      $sql = "INSERT INTO tasks (task, deadline) VALUES (:task, :deadline)";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindValue(':task', $task, PDO::PARAM_STR);
+      $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+      $stmt->execute();
+    } else {
+      $sql = "INSERT INTO tasks (task) VALUES (:task)";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindValue(':task', $task, PDO::PARAM_STR);
+      $stmt->execute();
+    }
   }
 }
 

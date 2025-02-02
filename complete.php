@@ -9,15 +9,14 @@ if (isset($_GET['id'])) {
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':id', $id, PDO::PARAM_INT);
   $stmt->execute();
-
   $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($task) {
     if ($task['status'] == 1) {
-      // 完了を未完了に戻し、完了日時にNULLをセットする
+      // statusが1(完了)の場合、statusを0に戻し、完了日時にNULLをセットする
       $sql = "UPDATE tasks SET status = 0, completed_at = NULL WHERE id = :id";
     } else {
-      // 完了にし、完了日時に今の日時をセットする
+      // statusが0(未完了)の場合、statusを1に変更し、完了日時に今の日時をセットする
       $sql = "UPDATE tasks SET status = 1, completed_at = NOW() WHERE id = :id";
     }
 

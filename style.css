@@ -1,52 +1,130 @@
+/* ベースデザイン */
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Arial', sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* 全体のコンテナ */
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+/* タイトル */
 h1 {
   text-align: center;
+  font-size: 24px;
+  color: #333;
 }
 
-form {
-  text-align: center;
+/* フォーム */
+.task-form {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-ul {
-  max-width: 500px;
+.task-form input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.task-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.task-form button:hover {
+  background: #0056b3;
+}
+
+/* タスクリスト */
+.task-list {
   list-style: none;
   padding: 0;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0;
 }
 
-li {
-  margin: 5px 0;
-  position: relative;
-}
-
-a {
-  margin-left: 10px;
-  color: blue;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.status {
-  display: none;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  padding: 10px;
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background: #fff;
-  border: 2px solid #333;
-  box-shadow: 0 0 2px rgba(0,0,0,0.3);
-  z-index: 2;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
-li:hover .status {
-  display: block;
+.task-item:hover {
+  transform: translateY(-2px);
+}
+
+/* 完了タスクのスタイル */
+.task-item.completed {
+  background: #eee;
+}
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #888;
+}
+.task-item.completed .btn-complete {
+  color: #333;
+  background: #b9b9b9;
+}
+
+/* タスクアクション */
+.task-actions a {
+  text-decoration: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-left: 5px;
+  transition: 0.2s ease;
+}
+
+.btn-complete {
+  background: #28a745;
+  color: white;
+}
+
+.btn-complete:hover {
+  background: #218838;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+}
+
+/* タスクステータス */
+.task-status {
+  width: 100%;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
 }
