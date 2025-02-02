@@ -3,36 +3,10 @@ require 'db.php';
 $sql = "SELECT * FROM tasks ORDER BY created_at DESC";
 $stmt = $pdo->query($sql);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDoリスト</title>
-  <link rel="stylesheet" href="style.css">
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll(".task-item").forEach(item => {
-        item.addEventListener("click", function() {
-          const taskId = this.dataset.id;
-          fetch(`toggle_status.php?id=${taskId}`)
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                this.classList.toggle("completed");
-                this.querySelector(".task-text").classList.toggle("line-through");
-              }
-            });
-        });
-      });
-    });
-  </script>
-</head>
-<body>
-  <div class="container">
-    <h1>ToDoリスト</h1>
+$title = 'ToDoリスト';
+require('./header.php');
+?>
 
     <!-- タスク追加フォーム -->
     <form action="add.php" method="POST" class="task-form">
