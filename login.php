@@ -9,6 +9,9 @@ session_destroy();
 $title = 'ログイン画面';
 require('./header.php');
 ?>
+    <?php if (isset($err['msg'])) : ?>
+      <p class="err_txt"><?php echo $err['msg']; ?></p>
+    <?php endif; ?>
     <form action="top.php" method="POST">
       <div class="form-item">
         <label for="email">メールアドレス：</label>

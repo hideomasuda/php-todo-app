@@ -19,9 +19,15 @@ if (count($err) > 0) {
   // エラーがあった場合はlogin.phpに戻す
   $_SESSION = $err;
   header('Location: login.php');
-
+  return;
 }
-  // ログイン成功時の処理
+// ログイン成功時の処理
+$result = UserLogic::login($email, $password);
+// ログイン失敗時の処理
+if (!$result) {
+  header('Location: login.php');
+  return;
+}
 
 $title = 'ログイン完了画面';
 require('./header.php');
