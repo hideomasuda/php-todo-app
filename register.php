@@ -14,7 +14,7 @@ if (!$email = filter_input(INPUT_POST, 'email')) {
 }
 $password = filter_input(INPUT_POST, 'password');
 if (!preg_match("/[a-zA-Z0-9]{1,8}/u", $password)) { //実際はもっと厳しく正規表現を書く
-  $err[] = 'パスワードを正しく入力してください。';
+  $err[] = 'パスワードを正しく入力してください。(英数字1~8文字)';
 }
 $password_conf = filter_input(INPUT_POST, 'password_conf');
 if ($password_conf !== $password) {
