@@ -29,18 +29,21 @@ if (!$result) {
   return;
 }
 
+// var_dump($_SESSION);
 $title = 'ログイン完了画面';
 require('./header.php');
 ?>
 
     <?php if (count($err) == 0): ?>
-      <p>ログインが完了しました！</p>
+      <p class="ta_c">こんにちは、<?php echo $_SESSION['login_user']['name']; ?>さん！<br>ログインが完了しました！</p>
+      <p class="ta_c"><a href="index.php">ToDoリストへ</a></p>
     <?php else: ?>
       <?php foreach ($err as $e): ?>
         <p><?= $e ?></p>
       <?php endforeach; ?>
+      <p class="ta_c"><a href="login.php">ログイン画面に戻る</a></p>
     <?php endif; ?>
-    <a href="login.php">戻る</a>
+
   </div>
 </body>
 </html>
