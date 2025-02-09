@@ -29,7 +29,7 @@ require('./header.php');
       </div>
       <input type="submit" value="ログイン">
     </form>
-    <a href="signup_form.php">新規登録はこちら</a>
+    <a href="signup_form.php" class="signup_link">新規登録はこちら</a>
   </div>
 </body>
 </html>

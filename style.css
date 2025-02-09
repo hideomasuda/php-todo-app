@@ -30,7 +30,7 @@ h1 {
   gap: 10px;
   margin-bottom: 20px;
 }
-.task-form input {
+input {
   flex: 1;
   padding: 10px;
   border: 2px solid #ddd;
@@ -118,5 +118,25 @@ h1 {
 }
 
 .ta_c {
+  text-align: center;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-item label {
+  display: block;
+  width: 150px;
+}
+input[type="submit"] {
+  cursor: pointer;
+  display: block;
+  padding: 5px 10px;
+  margin: 20px auto 10px;
+}
+.signup_link {
+  display: block;
   text-align: center;
 }
