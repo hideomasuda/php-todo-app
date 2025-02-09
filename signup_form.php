@@ -1,5 +1,6 @@
 <?php
 $title = 'ユーザー登録画面';
+require_once 'functions.php';
 require('./header.php');
 ?>
     <form action="register.php" method="POST">
@@ -19,6 +20,7 @@ require('./header.php');
         <label for="password_conf">パスワード確認：</label>
         <input type="password" name="password_conf">
       </div>
+      <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">
       <input type="submit" value="新規登録">
     </form>
   </div>
