@@ -1,8 +1,23 @@
 <?php
+session_start();
 $title = 'ユーザー登録画面';
-require_once 'functions.php';
+require_once './functions.php';
+require_once './classes/UserLogic.php';
+
+$result = UserLogic::checkLogin();
+if ($result) {
+  header('Location: mypage.php');
+  return;
+}
+
+$login_err = isset($_SESSION['login_err']) ? $_SESSION['login_err'] : null;
+unset($_SESSION['login_err']);
 require('./header.php');
 ?>
+    <?php if (isset($login_err)) : ?>
+      <p class="err_txt"><?php echo $login_err; ?></p>
+    <?php endif; ?>
+
     <form action="register.php" method="POST">
       <div class="form-item">
         <label for="username">ユーザー名：</label>

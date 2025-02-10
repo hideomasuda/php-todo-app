@@ -1,35 +1,42 @@
 <?php
+ini_set("display_errors", TRUE);
 session_start();
-$err = $_SESSION;
+require_once('./classes/UserLogic.php');
 
-// セッションの初期化
-$_SESSION = array();
-session_destroy();
+// エラーメッセージ
+$err = [];
 
-$title = 'ログイン画面';
+// バリデーション
+if (!$email = filter_input(INPUT_POST, 'email')) {
+  $err['email'] = 'メールアドレスを入力してください。';
+}
+if (!$password = filter_input(INPUT_POST, 'password')) {
+  $err['password'] = 'パスワードを入力してください。';
+}
+
+
+if (count($err) > 0) {
+  // エラーがあった場合はlogin.phpに戻す
+  $_SESSION = $err;
+  header('Location: login_form.php');
+  return;
+}
+// ログイン成功時の処理
+$result = UserLogic::login($email, $password);
+// ログイン失敗時の処理
+if (!$result) {
+  header('Location: login_form.php');
+  return;
+}
+
+// var_dump($_SESSION);
+$title = 'ログイン完了';
 require('./header.php');
 ?>
-    <?php if (isset($err['msg'])) : ?>
-      <p class="err_txt"><?php echo $err['msg']; ?></p>
-    <?php endif; ?>
-    <form action="top.php" method="POST">
-      <div class="form-item">
-        <label for="email">メールアドレス：</label>
-        <input type="email" name="email">
-        <?php if (isset($err['email'])) : ?>
-          <p class="err_txt"><?php echo $err['email']; ?></p>
-        <?php endif; ?>
-      </div>
-      <div class="form-item">
-        <label for="password">パスワード：</label>
-        <input type="password" name="password">
-        <?php if (isset($err['password'])) : ?>
-          <p class="err_txt"><?php echo $err['password']; ?></p>
-        <?php endif; ?>
-      </div>
-      <input type="submit" value="ログイン">
-    </form>
-    <a href="signup_form.php" class="signup_link">新規登録はこちら</a>
+
+    <p class="ta_c">こんにちは、<?php echo $_SESSION['login_user']['name']; ?>さん！<br>ログインが完了しました！</p>
+    <p class="ta_c"><a href="./mypage.php">マイページへ</a></p>
+
   </div>
 </body>
 </html>

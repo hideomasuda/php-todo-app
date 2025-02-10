@@ -45,12 +45,13 @@ require('./header.php');
 
     <?php if (count($err) == 0): ?>
       <p>ユーザー登録が完了しました！</p>
+      <a href="./login_form.php">ログイン画面へ</a>
     <?php else: ?>
       <?php foreach ($err as $e): ?>
         <p><?= $e ?></p>
       <?php endforeach; ?>
+      <a href="./signup_form.php">戻る</a>
     <?php endif; ?>
-    <a href="./signup_form.php">戻る</a>
   </div>
 </body>
 </html>
