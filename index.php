@@ -4,7 +4,6 @@ $sql = "SELECT * FROM tasks ORDER BY created_at DESC";
 $stmt = $pdo->query($sql);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
 $title = 'ToDoリスト';
 require('./header.php');
 ?>

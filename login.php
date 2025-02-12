@@ -14,7 +14,6 @@ if (!$password = filter_input(INPUT_POST, 'password')) {
   $err['password'] = 'パスワードを入力してください。';
 }
 
-
 if (count($err) > 0) {
   // エラーがあった場合はlogin.phpに戻す
   $_SESSION = $err;
