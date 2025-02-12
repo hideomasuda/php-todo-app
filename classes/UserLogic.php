@@ -105,4 +105,13 @@ class UserLogic
 
     return $result;
   }
+
+  /**
+   * ログアウト処理
+   */
+  public static function logout()
+  {
+    $_SESSION = array();
+    session_destroy();
+  }
 }
